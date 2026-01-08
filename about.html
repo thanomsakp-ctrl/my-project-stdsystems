@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About YALA | ข้อมูลจังหวัด</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Prompt:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- COPY STYLE FROM INDEX.HTML (KEEP CONSISTENCY) --- */
+        :root {
+            --primary: #0F3D3E; /* Deep Emerald Green */
+            --accent: #D4AF37; /* Luxury Gold */
+            --light: #F9F9F9;
+            --dark: #1a1a1a;
+            --glass: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo-text, .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            background: var(--glass);
+            padding: 15px 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 24px;
+            color: var(--accent);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .navbar.scrolled .logo-text {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.4s;
+        }
+
+        .nav-links a.active {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: var(--primary);
+        }
+        
+        /* --- Inner Page Header (Lower Height) --- */
+        .page-header {
+            height: 60vh; /* สั้นกว่าหน้า Index เพื่อเข้าเนื้อหาเร็วขึ้น */
+            background: linear-gradient(rgba(15, 61, 62, 0.7), rgba(15, 61, 62, 0.5)), url('https://images.unsplash.com/photo-1599581907604-586735e16b9b?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .page-title {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .breadcrumb {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Content Layout --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .split-layout {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 100px;
+        }
+
+        .split-text {
+            flex: 1;
+        }
+
+        .split-img {
+            flex: 1;
+            height: 400px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 20px 20px 0px var(--accent); /* Graphic Element */
+        }
+
+        .split-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .split-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin-bottom: 30px;
+        }
+
+        p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* --- Motto Section (Quote) --- */
+        .motto-section {
+            background-color: var(--primary);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .quote-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .quote-text {
+            font-size: 2.2rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        /* --- Districts Grid --- */
+        .district-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .district-card {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border: 1px solid #eee;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .district-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .district-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .district-name {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 80px 50px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .split-layout {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .split-img {
+                width: 100%;
+                box-shadow: 10px 10px 0px var(--accent);
+            }
+            .district-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-gem"></i>
+                <span class="logo-text">YALA PRIVILEGE</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">หน้าหลัก</a></li>
+            <li><a href="about.html" class="active">ข้อมูลจังหวัด</a></li> <li><a href="index.html#destinations">สถานที่ท่องเที่ยว</a></li>
+            <li><a href="#contact">ติดต่อ</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-header">
+        <h1 class="page-title">ABOUT YALA</h1>
+        <div class="breadcrumb">Home • Provincial Info</div>
+    </header>
+
+    <div class="container">
+        <div class="split-layout">
+            <div class="split-text">
+                <div class="section-header">
+                    <h2>The History & Geography</h2>
+                    <div class="divider"></div>
+                </div>
+                <p>
+                    <strong>"ยะลา"</strong> (Yala) มาจากคำภาษามลายูถิ่นว่า <strong>"ยาลอ" (Jala)</strong> แปลว่า "แห" ซึ่งเป็นคำที่สอดคล้องกับลักษณะภูมิประเทศที่เป็นภูเขาล้อมรอบ มีที่ราบตรงกลางคล้ายแอ่งกระทะ หรือปากแห
+                </p>
+                <p>
+                    ยะลาเป็นจังหวัดเดียวในภาคใต้ที่ไม่ติดทะเล แต่ถูกชดเชยด้วยความอุดมสมบูรณ์ของผืนป่าและขุนเขา เป็นศูนย์กลางการบริหารราชการของจังหวัดชายแดนภาคใต้ มีประวัติศาสตร์ยาวนาน และเป็นการผสมผสานวัฒนธรรมระหว่างไทย พุทธ จีน และมลายูมุสลิม อย่างลงตัว
+                </p>
+                <div style="margin-top: 30px;">
+                    <span style="color: var(--accent); font-weight: 600;">พื้นที่ทั้งหมด:</span> 4,521 ตร.กม.<br>
+                    <span style="color: var(--accent); font-weight: 600;">ดอกไม้ประจำจังหวัด:</span> ดอกพิกุล<br>
+                    <span style="color: var(--accent); font-weight: 600;">ต้นไม้ประจำจังหวัด:</span> ต้นศรียะลา (โสกเหลือง)
+                </div>
+            </div>
+            <div class="split-img">
+                <img src="https://images.unsplash.com/photo-1594132845038-536c7e3f8487?q=80&w=800&auto=format&fit=crop" alt="Yala City View">
+            </div>
+        </div>
+    </div>
+
+    <section class="motto-section">
+        <i class="fas fa-quote-left quote-icon"></i>
+        <div class="quote-text">
+            "ใต้สุดสยาม เมืองงามชายแดน"
+        </div>
+        <p style="color: rgba(255,255,255,0.8);">คำขวัญประจำจังหวัดยะลา</p>
+    </section>
+
+    <div class="container">
+        <div class="section-header" style="text-align: center;">
+            <h2>Administrative Districts</h2>
+            <div class="divider" style="margin: 0 auto 30px auto;"></div>
+            <p>แบ่งการปกครองออกเป็น 8 อำเภอ</p>
+        </div>
+
+        <div class="district-grid">
+            <div class="district-card">
+                <i class="fas fa-city district-icon"></i>
+                <div class="district-name">อำเภอเมืองยะลา</div>
+            </div>
+            <div class="district-card">
+                <i class="fas fa-cloud district-icon"></i>
+                <div class="district-name">อำเภอเบตง</div>
+            </div>
+            <div class="district-card">
+                <i class="fas fa-mountain district-icon"></i>
+                <div class="district-name">อำเภอบันนังสตา</div>
+            </div>
+            <div class="district-card">
+                <i class="fas fa-water district-icon"></i>
+                <div class="district-name">อำเภอธารโต</div>
+            </div>
+            <div class="district-card">
+                <i class="fas fa-tree district-icon"></i>
+                <div class="district-name">อำเภอยะหา</div>
+            </div>
+            <div class="district-card">
+                <i class="fas fa-landmark district-icon"></i>
+                <div class="district-name">อำเภอรามัน</div>
+            </div>
+            <div class="district-card">
+                <i class="fas fa-leaf district-icon"></i>
+                <div class="district-name">อำเภอกาบัง</div>
+            </div>
+            <div class="district-card">
+                <i class="fas fa-seedling district-icon"></i>
+                <div class="district-name">อำเภอกรงปินัง</div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <span class="footer-logo">YALA PRIVILEGE</span>
+        <p style="margin-bottom: 30px; opacity: 0.7;">Tourism Authority of Thailand, Yala Office</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-line"></i></a>
+        </div>
+        <div style="margin-top: 50px; font-size: 0.8rem; opacity: 0.5;">
+            &copy; 2024 Designed for Professional Showcase.
+        </div>
+    </footer>
+
+    <script>
+        // Navbar Scroll Effect (Same Script)
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
